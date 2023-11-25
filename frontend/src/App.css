@@ -1,0 +1,23 @@
+.login {
+    transition: .5s ease-in-out;
+}
+
+.login:not(:hover) {
+    transform: scale(0.8);
+}
+
+.login:hover {
+    transform: scale(1.2);
+}
+
+.signup {
+    transition: .5s ease-in-out;
+}
+
+.signup:not(:hover) {
+    transform: scale(0.8);
+}
+
+.signup:hover {
+    transform: scale(1.2);
+}
