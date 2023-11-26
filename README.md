@@ -9,10 +9,10 @@ cd backend -> npm install -> nodemon
 
 set your postgre with table users and 'user_roles'
 
-##users table with following column
+## users table with following column
 email(text),  password(text) , id (serial)
 
-##user_role table with following column
+## user_role table with following column
 email(text), role(text), password(text)
 
 DATABASE = authentication ,
