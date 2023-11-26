@@ -3,11 +3,11 @@
 }
 
 .login:not(:hover) {
-    transform: scale(0.8);
+    transform: scale(1);
 }
 
 .login:hover {
-    transform: scale(1.02);
+    transform: scale(1.025);
 }
 
 .signup {
@@ -15,9 +15,9 @@
 }
 
 .signup:not(:hover) {
-    transform: scale(0.8);
+    transform: scale(1);
 }
 
 .signup:hover {
-    transform: scale(1.02);
+    transform: scale(1.025);
 }
