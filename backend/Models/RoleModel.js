@@ -19,7 +19,7 @@ const assignRoleToUser = async (email, roleName, password) => {
     const existingRoleValues = [email, roleName];
 
     const existingRoleResult = await pool.query(existingRoleQuery, existingRoleValues);
-    console.log("existingRoleResult ", existingRoleResult)
+    // console.log("existingRoleResult ", existingRoleResult)
     if (existingRoleResult.rows.length > 0) {
         // User is already registered for the specified role
         throw new Error(`User is already registered for the role: ${roleName}`);
@@ -32,7 +32,7 @@ const assignRoleToUser = async (email, roleName, password) => {
         const result = await pool.query(insertQuery, insertValues);
         return result.rows[0];
     } catch (error) {
-        console.error('Error assigning role to user', error);
+        // console.error('Error assigning role to user', error);
         throw error;
     }
 };
@@ -47,11 +47,11 @@ const getUserRoles = async (email) => {
             // console.log("result ", result)
             return result.rows.map(row => row.role);
         } else {
-            console.log("no entry available")
+            // console.log("no entry available")
             return null;
         }
     } catch (error) {
-        console.error('Error fetching user roles', error);
+        // console.error('Error fetching user roles', error);
         throw error;
     }
 };
@@ -61,16 +61,15 @@ const getUserRolesforLogin = async (email, role) => {
 
     try {
         const result = await pool.query(query, values);
-        console.log(result)
         if (result.rows.length>0) {
-            console.log("result rows password -->", result.rows[0].password)
+            // console.log("result rows password -->", result.rows[0].password)
             return result.rows[0].password;
         } else {
-            console.log("no entry available")
+            // console.log("no entry available")
             return null;
         }
     } catch (error) {
-        console.error('Error fetching user roles', error);
+        // console.error('Error fetching user roles', error);
         throw error;
     }
 };

@@ -9,7 +9,7 @@ const pool = new Pool({
     user: process.env.DATABASE_USER,
     host: process.env.DATABASE_HOST,
     database: process.env.DATABASE,
-    password: process.env.DATABASE_PASS ,
+    password: process.env.DATABASE_PASS,
     port: 5432,
 });
 
@@ -22,7 +22,6 @@ const createUser = async (email, password) => {
         const result = await pool.query(query, values);
         return result.rows[0];
     } catch (error) {
-        console.error('Error creating user', error);
         throw error;
     }
 };
@@ -35,7 +34,6 @@ const getUserByEmail = async (email) => {
         const result = await pool.query(query, values);
         return result.rows[0];
     } catch (error) {
-        console.error('Error fetching user by email', error);
         throw error;
     }
 };
