@@ -22,7 +22,7 @@ const Signup = () => {
             role: selectedRole,
         };
 
-        axios.post('http://localhost:5000/api/signup/assignRole', { email: email, selectedRole: selectedRole, password: password })
+        axios.post('http://localhost:5000/api/signup', formData)
             .then(response => {
                 console.log(response.data)
                 setMsg(response.data.msg)
