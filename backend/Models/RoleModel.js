@@ -61,7 +61,8 @@ const getUserRolesforLogin = async (email, role) => {
 
     try {
         const result = await pool.query(query, values);
-        if (result) {
+        console.log(result)
+        if (result.rows.length>0) {
             console.log("result rows password -->", result.rows[0].password)
             return result.rows[0].password;
         } else {

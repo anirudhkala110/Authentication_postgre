@@ -51,16 +51,23 @@ app.post('/api/signup', async (req, res) => {
     try {
         // Check if the user already exists
         const existingUser = await getUserByEmail(email);
-        const existingRoleValues = await getUserRoles(email)
         if (existingUser) {
-            return res.status(400).json({ error: 'User with this email already exists' });
+            const existingRoles = await getUserRoles(email);
+            console.log("existingRoles ", existingRoles)
+            if (existingRoles && existingRoles.includes(role)) {
+                // User already registered for the specified role
+                return res.json({ msg: `User already registered for the role: ${role}`, msg_type: "error" });
+            }
+            const result = await assignRoleToUser(email, role, password);
+            res.json({ msg: `Role ${result.role} assigned to user with email ${result.email}`, msg_type: "good" });
         }
-
-        // Create a new user
-        const newUser = await createUser(email, password);
-
-        // Return a success message or user details
-        res.json({ success: true, user: newUser });
+        else {
+            // Create a new user
+            const newUser = await createUser(email, password);
+            const result = await assignRoleToUser(email, role, password);
+            // Return a success message or user details
+            res.json({ success: true, user: newUser });
+        }
     } catch (error) {
         console.error('Error during signup', error);
         res.status(500).json({ error: 'Internal Server Error' });
@@ -72,8 +79,9 @@ app.post('/api/login', async (req, res) => {
     console.log("\nemail ", email, "\npassword ", password, "\nrole ", role)
     try {
         const existingRolespass = await getUserRolesforLogin(email, role);
+        console.log("ExistingRole -> ", existingRolespass)
         if (existingRolespass) {
-            const passwordMatch = await comparePasswords(password,existingRolespass );
+            const passwordMatch = await comparePasswords(password, existingRolespass);
             console.log("passwordMatch ", passwordMatch)
             if (passwordMatch === false) {
                 // res.status(401).json({ error: 'Invalid password.' });
@@ -84,6 +92,9 @@ app.post('/api/login', async (req, res) => {
                 // res.json({ token });
                 return res.json({ msg: "Successfuly Logged in.", msg_type: "good" })
             }
+        }
+        else {
+            return res.json({ msg: `Email does not exists for ${role}`, msg_type: "error" })
         }
 
         // Assuming authentication is successful, create a JWT token
