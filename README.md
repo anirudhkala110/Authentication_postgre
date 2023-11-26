@@ -6,6 +6,7 @@ cd frontend -> npm install -> npm start
 
 cd backend -> npm install -> nodemon
 
+## Database name authentication then tables inside it are following
 
 set your postgre with table users and 'user_roles'
 
