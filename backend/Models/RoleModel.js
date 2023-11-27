@@ -1,14 +1,5 @@
-import pkg from 'pg';
-const { Pool } = pkg;
-import doenv from 'dotenv'
+import {pool} from '../Controller/db.js'
 import bcrypt from 'bcryptjs';
-const pool = new Pool({
-    user: process.env.DATABASE_USER,
-    host: process.env.DATABASE_HOST,
-    database: process.env.DATABASE,
-    password: process.env.DATABASE_PASS,
-    port: 5432, // default PostgreSQL port
-});
 
 const assignRoleToUser = async (email, roleName, password) => {
     // Check if the user already exists for the specified role

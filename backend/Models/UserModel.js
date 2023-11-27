@@ -1,17 +1,5 @@
-import pkg from 'pg';
-const { Pool } = pkg;
-import doenv from 'dotenv'
+import { pool } from '../Controller/db.js'
 import bcrypt from 'bcryptjs';
-
-doenv.config()
-
-const pool = new Pool({
-    user: process.env.DATABASE_USER,
-    host: process.env.DATABASE_HOST,
-    database: process.env.DATABASE,
-    password: process.env.DATABASE_PASS,
-    port: 5432,
-});
 
 const createUser = async (email, password) => {
     const hashedPassword = await bcrypt.hash(password, 10);
